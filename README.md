@@ -1,11 +1,12 @@
 # jdk-log
-Simple to use `java.util.logging.Logger` wrapper.
+
+JDK Log is a simple to use `java.util.logging.Logger` wrapper. Beside parameterized logging it supports also logging callbacks which can significantly boost logging performance for *disabled* Logger levels.
 
 # Features
 
 * uses String.format() instead of the default message formatter
-* provides a callback so that you can use StringBuilder, '+' operator, ...
-* provides parameterization in the presence of a throwable
+* provides logging callbacks so that you can use StringBuilder, '+' operator, ...
+* parameterization logging statements in presence of an exception/throwable
 
 # Example code
 
