@@ -32,11 +32,17 @@ public class Test {
 				return "args.length: " + args.length;
 			}
 		});
+		
+		// or, using IF statement...
+	
+		if (LOG.isDebugEnabled()) {
+			LOG.d("args.length: " + args.length);
+		}
 	}
 }
 ```
 
-Running Test.java gives:
+Running Test.java gives (DEBUG was disabled):
 
 ```
 Dec 19, 2015 12:38:39 AM test.logging.Test main
