@@ -33,7 +33,7 @@ public class Test {
 			}
 		});
 		
-		// or, using IF statement...
+		// Or, using the logging level testing API...
 	
 		if (LOG.isDebugEnabled()) {
 			LOG.d("args.length: " + args.length);
