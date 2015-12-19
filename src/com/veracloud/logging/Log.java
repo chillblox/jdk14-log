@@ -17,6 +17,13 @@ public final class Log {
 	Log(String name) {
 		mLogger = Logger.getLogger(name);
 	}
+	
+	/**
+	 * Get wrapped {@link Logger} instance.
+	 */
+	public Logger getLogger() {
+		return mLogger;
+	}
 
 	// ---------------------------
 	// TRACE
