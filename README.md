@@ -100,7 +100,7 @@ The average values for `d1`, `d2`, `d3`, `d4`, `d5` and `d6` are:
 <d1>=17.3772s, <d2>=16.6007s, <d3>=17.2517s, <d4>=15.8935s, <d5>=16.1128s, <d6>=22.5896s
 ```
 				
-and, the winner is: `d4`, logging callbacks with `+` operator!!! 
+and, the winner is: logging callbacks with `+` operator!!! 
 
 Compared to parameterized logging, logging callbacks are ~2 seconds faster than String.format() and ~6 seconds faster than the default parameterized logging of `java.util.loggin.Logger`. Ok, this is an insignificant difference for the 1 million logs generated, but could matter if the format string has more parameters.
 
