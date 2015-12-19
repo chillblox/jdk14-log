@@ -1,12 +1,12 @@
 **jdk-log** is a simple to use framework that wraps `java.util.logging.Logger`.
 
-Beside parameterized logging and logging level testing API, it also provides logging callbacks and parameterization of logging statements in presence of an exception/throwable.
+Beside parameterized logging and logging level testing API, it also provides logging callbacks and parameterization of logging statements in presence of an exception.
 
 # Features
 
 * uses String.format() instead of the default message formatter
 * provides logging callbacks so that you can use StringBuilder, '+' operator, ...
-* parameterization of logging statements in presence of an exception/throwable
+* parameterization of logging statements in presence of an exception
 
 # Example code
 
