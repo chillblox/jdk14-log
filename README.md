@@ -116,7 +116,7 @@ Anyway, more important is logging performance for *disabled* logging statements,
 <d1>=0.0083s, <d2>=0.0055s, <d3>=0.0066s, <d4>=0.0059s, <d5>=0.0061, <d6>=0.0052s
 ```
 
-Benchmark code:
+##Benchmark code:
 
 ```
 package test.logging;
