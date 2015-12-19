@@ -110,7 +110,7 @@ With 5 parameters I get similar results:
 <d1>=17.7771s, <d2>=17.2128s, <d3>=19.2756s, <d4>=16.3927s, <d5>=16.5691s, <d5>=22.6473s
 ```
 
-Anyway logging is a matter of taste, and, more important is logging performance for disabled logging statements, which are significantly faster by using features like parameterized logging, logging level testing, or logging callbacks.
+Anyway, more important is logging performance for *disabled* logging statements, which are significantly faster by using features like parameterized logging, logging level testing, or logging callbacks.
 
 Benchmark code:
 
