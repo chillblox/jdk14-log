@@ -87,7 +87,11 @@ d1=16.774000s, d2=16.155000s, d3=16.831000s, d4=15.387000s, d5=15.438000s
 
 where: `<d1>=17.262`, `<d2>=16.6638`, `<d3>=17.1912`, `<d4>=15.7475` and `<d5>=15.9221`.
 				
-The winner is: logging callbacks with `+` operator!!!
+The winner is: logging callbacks with `+` operator!!! 
+
+Compared with parameterized logging statements it is 2 seconds faster for 1 milion logging statements - Ok, not a big deal but anyway it is supported in jdk-log, how you log its a matter of taste.
+
+Benchmark code:
 
 ```
 package test.logging;
