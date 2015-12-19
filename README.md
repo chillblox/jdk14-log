@@ -6,7 +6,7 @@ JDK Log is a simple to use `java.util.logging.Logger` wrapper. Beside parameteri
 
 * uses String.format() instead of the default message formatter
 * provides logging callbacks so that you can use StringBuilder, '+' operator, ...
-* parameterization logging statements in presence of an exception/throwable
+* parameterization of logging statements in presence of an exception/throwable
 
 # Example code
 
