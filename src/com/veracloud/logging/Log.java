@@ -55,7 +55,7 @@ public final class Log {
 	 */
 	public void t(Callback cb) {
 		if (mLogger.isLoggable(Level.FINEST)) {
-			log(SELF, Level.FINEST, cb.getMessage(), null);
+			log(SELF, Level.FINEST, cb.get(), null);
 		}
 	};
 
@@ -87,7 +87,7 @@ public final class Log {
 	 */
 	public void t(Throwable t, Callback cb) {
 		if (mLogger.isLoggable(Level.FINEST)) {
-			log(SELF, Level.FINEST, cb.getMessage(), t);
+			log(SELF, Level.FINEST, cb.get(), t);
 		}
 	};
 
@@ -128,7 +128,7 @@ public final class Log {
 	 */
 	public void d(Callback cb) {
 		if (mLogger.isLoggable(Level.FINE)) {
-			log(SELF, Level.FINE, cb.getMessage(), null);
+			log(SELF, Level.FINE, cb.get(), null);
 		}
 	};
 
@@ -160,7 +160,7 @@ public final class Log {
 	 */
 	public void d(Throwable t, Callback cb) {
 		if (mLogger.isLoggable(Level.FINE)) {
-			log(SELF, Level.FINE, cb.getMessage(), t);
+			log(SELF, Level.FINE, cb.get(), t);
 		}
 	};
 
@@ -204,7 +204,7 @@ public final class Log {
 	 */
 	public void i(Callback cb) {
 		if (mLogger.isLoggable(Level.INFO)) {
-			log(SELF, Level.INFO, cb.getMessage(), null);
+			log(SELF, Level.INFO, cb.get(), null);
 		}
 	};
 
@@ -236,7 +236,7 @@ public final class Log {
 	 */
 	public void i(Throwable t, Callback cb) {
 		if (mLogger.isLoggable(Level.INFO)) {
-			log(SELF, Level.INFO, cb.getMessage(), t);
+			log(SELF, Level.INFO, cb.get(), t);
 		}
 	};
 
@@ -278,7 +278,7 @@ public final class Log {
 	 */
 	public void w(Callback cb) {
 		if (mLogger.isLoggable(Level.WARNING)) {
-			log(SELF, Level.WARNING, cb.getMessage(), null);
+			log(SELF, Level.WARNING, cb.get(), null);
 		}
 	};
 
@@ -310,7 +310,7 @@ public final class Log {
 	 */
 	public void w(Throwable t, Callback cb) {
 		if (mLogger.isLoggable(Level.WARNING)) {
-			log(SELF, Level.WARNING, cb.getMessage(), t);
+			log(SELF, Level.WARNING, cb.get(), t);
 		}
 	};
 
@@ -351,7 +351,7 @@ public final class Log {
 	 */
 	public void e(Callback cb) {
 		if (mLogger.isLoggable(Level.SEVERE)) {
-			log(SELF, Level.SEVERE, cb.getMessage(), null);
+			log(SELF, Level.SEVERE, cb.get(), null);
 		}
 	};
 
@@ -383,7 +383,7 @@ public final class Log {
 	 */
 	public void e(Throwable t, Callback cb) {
 		if (mLogger.isLoggable(Level.SEVERE)) {
-			log(SELF, Level.SEVERE, cb.getMessage(), t);
+			log(SELF, Level.SEVERE, cb.get(), t);
 		}
 	};
 
@@ -431,7 +431,7 @@ public final class Log {
 	// ---------------------------
 
 	/** Logging callback. */
-	public static interface Callback {
-		String getMessage();
+	public static interface Callback /* extends Supplier<String> */ {
+		String get();
 	}
 }
