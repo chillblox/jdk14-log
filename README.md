@@ -1,6 +1,6 @@
 # jdk-log
 
-JDK Log is a simple to use `java.util.logging.Logger` wrapper. Beside parameterized logging and logging level testing API, it provides also logging callbacks which can boost logging performance.
+JDK Log is a simple to use `java.util.logging.Logger` wrapper. Beside parameterized logging and logging level testing API, it provides also logging callbacks and parameterization of logging statements in presence of an exception/throwable.
 
 # Features
 
