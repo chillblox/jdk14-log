@@ -116,6 +116,8 @@ Anyway, more important is logging performance for *disabled* logging statements,
 <d1>=0.0083s, <d2>=0.0055s, <d3>=0.0066s, <d4>=0.0059s, <d5>=0.0061, <d6>=0.0052s
 ```
 
+where you can see that the overhead of using jdk-log instead of `java.util.logging.Logger`, which is insignificant even for the 1 million log statements used in this benchmark.
+
 ### Benchmark code:
 
 ```
