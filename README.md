@@ -28,7 +28,7 @@ public class Test {
 
         LOG.e(new RuntimeException("Error Message"), new Callback() {
             @Override
-            public String getMessage() {
+            public String get() {
                 return "args.length: " + args.length;
             }
         });
@@ -212,7 +212,7 @@ public class Test {
 	private static void log_4(final String[] args) {
 		LOG.e(new Callback() {
 			@Override
-			public String getMessage() {
+			public String get() {
 				return "args.length: " + args.length;
 			}
 		});
@@ -221,7 +221,7 @@ public class Test {
 	private static void log_5(final String[] args) {
 		LOG.e(new Callback() {
 			@Override
-			public String getMessage() {
+			public String get() {
 				StringBuilder sb = new StringBuilder();
 				sb.append("args.length: ").append(args.length);
 				return sb.toString();
