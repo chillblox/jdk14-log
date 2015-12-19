@@ -89,7 +89,14 @@ where: `<d1>=17.262`, `<d2>=16.6638`, `<d3>=17.1912`, `<d4>=15.7475` and `<d5>=1
 				
 The winner is: logging callbacks with `+` operator!!! 
 
-Compared with parameterized logging statements it is 2 seconds faster for 1 milion logging statements - Ok, not a big deal but anyway it is supported in jdk-log, how you log its a matter of taste.
+Compared to parameterized logging, logging callbacks are 2 seconds faster for 1 milion logging statements. Ok, this is an insignificant difference that could matter if the format string has more parameters.
+
+With 5 parameters I get:
+
+```
+$ java -cp . test.logging.Test 2> /dev/null
+d1=17.120000s, d2=16.732000s, d3=19.253000s, d4=16.202000s, d5=16.479000s
+```
 
 Benchmark code:
 
