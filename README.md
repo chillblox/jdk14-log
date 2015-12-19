@@ -83,8 +83,6 @@ $ java -cp . test.logging.Test 2> /dev/null
 d1=17.407000s, d2=16.525000s, d3=17.231000s, d4=15.971000s, d5=16.236000s, d6=22.817000s
 $ java -cp . test.logging.Test 2> /dev/null
 d1=17.594000s, d2=16.735000s, d3=17.218000s, d4=15.992000s, d5=16.547000s, d6=22.860000s
----------------------------------
-<d1>=17.3772, <d2>=16.6007, <d3>=17.2517, <d4>=15.8935, <d5>=16.1128, <d6>=22.5896
 ```
 
 where:
@@ -95,17 +93,24 @@ where:
 * `d4` uses logging callback with `+` operator
 * `d5` uses logging callback with `StringBuilder`
 * `d6` uses default `java.util.logging.Logger` parameterized logging
+ 
+The average values for `d1`, `d2`, `d3`, `d4`, `d5` and `d6` are:
+
+```
+<d1>=17.3772s, <d2>=16.6007s, <d3>=17.2517s, <d4>=15.8935s, <d5>=16.1128s, <d6>=22.5896s
+```
 				
-The winner is: logging callbacks with `+` operator!!! 
+and, the winner is: `d4`, logging callbacks with `+` operator!!! 
 
 Compared to parameterized logging, logging callbacks are ~2 seconds faster than String.format() and ~6 seconds faster than the default parameterized logging of `java.util.loggin.Logger`. Ok, this is an insignificant difference for the 1 million logs generated, but could matter if the format string has more parameters.
 
 With 5 parameters I get:
 
 ```
-$ java -cp . test.logging.Test 2> /dev/null
-d1=16.847000s, d2=16.617000s, d3=19.024000s, d4=16.075000s, d5=16.408000s, d5=22.285000s
+<d1>=17.7771s, <d2>=17.2128s, <d3>=19.2756s, <d4>=16.3927s, <d5>=16.5691s, <d5>=22.6473s
 ```
+
+Anyway logging is a matter of taste, and, more important is logging performance for disabled logging statements, which are significantly faster by using features like parameterized logging, logging level testing, or logging callbacks.
 
 Benchmark code:
 
