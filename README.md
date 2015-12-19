@@ -64,38 +64,47 @@ Running 10 times the benchmark listed at the end of this section, I get:
 
 ```
 $ java -cp . test.logging.Test 2> /dev/null
-d1=17.193000s, d2=16.887000s, d3=17.144000s, d4=16.060000s, d5=16.221000s
+d1=16.984000s, d2=16.534000s, d3=17.542000s, d4=15.653000s, d5=15.770000s, d6=22.128000s
 $ java -cp . test.logging.Test 2> /dev/null
-d1=18.155000s, d2=18.808000s, d3=17.737000s, d4=16.242000s, d5=16.305000s
+d1=17.859000s, d2=16.417000s, d3=16.925000s, d4=15.503000s, d5=15.546000s, d6=22.198000s
 $ java -cp . test.logging.Test 2> /dev/null
-d1=17.592000s, d2=16.747000s, d3=17.202000s, d4=15.777000s, d5=16.098000s
+d1=16.991000s, d2=16.162000s, d3=17.334000s, d4=15.728000s, d5=15.974000s, d6=23.260000s
 $ java -cp . test.logging.Test 2> /dev/null
-d1=17.054000s, d2=16.211000s, d3=16.832000s, d4=15.327000s, d5=15.719000s
+d1=18.097000s, d2=17.083000s, d3=17.535000s, d4=16.471000s, d5=16.666000s, d6=23.109000s
 $ java -cp . test.logging.Test 2> /dev/null
-d1=17.155000s, d2=16.299000s, d3=17.279000s, d4=16.072000s, d5=15.966000s
+d1=17.200000s, d2=16.030000s, d3=16.913000s, d4=15.708000s, d5=15.681000s, d6=22.032000s
 $ java -cp . test.logging.Test 2> /dev/null
-d1=17.163000s, d2=16.339000s, d3=17.210000s, d4=15.606000s, d5=15.955000s
+d1=17.436000s, d2=16.927000s, d3=17.180000s, d4=16.089000s, d5=16.615000s, d6=22.583000s
 $ java -cp . test.logging.Test 2> /dev/null
-d1=17.257000s, d2=16.421000s, d3=17.268000s, d4=15.932000s, d5=16.017000s
+d1=16.741000s, d2=16.948000s, d3=16.905000s, d4=15.790000s, d5=15.805000s, d6=22.187000s
 $ java -cp . test.logging.Test 2> /dev/null
-d1=16.882000s, d2=16.344000s, d3=17.537000s, d4=15.694000s, d5=15.705000s
+d1=17.463000s, d2=16.646000s, d3=17.734000s, d4=16.030000s, d5=16.288000s, d6=22.722000s
 $ java -cp . test.logging.Test 2> /dev/null
-d1=17.395000s, d2=16.427000s, d3=16.872000s, d4=15.378000s, d5=15.797000s
+d1=17.407000s, d2=16.525000s, d3=17.231000s, d4=15.971000s, d5=16.236000s, d6=22.817000s
 $ java -cp . test.logging.Test 2> /dev/null
-d1=16.774000s, d2=16.155000s, d3=16.831000s, d4=15.387000s, d5=15.438000s
+d1=17.594000s, d2=16.735000s, d3=17.218000s, d4=15.992000s, d5=16.547000s, d6=22.860000s
+---------------------------------
+<d1>=17.3772, <d2>=16.6007, <d3>=17.2517, <d4>=15.8935, <d5>=16.1128, <d6>=22.5896
 ```
 
-where: `<d1>=17.262`, `<d2>=16.6638`, `<d3>=17.1912`, `<d4>=15.7475` and `<d5>=15.9221`.
+where:
+
+* `d1` uses the `+` operator
+* `d2` uses `StringBuilder`
+* `d3` uses `String.format()`
+* `d4` uses logging callback with `+` operator
+* `d5` uses logging callback with `StringBuilder`
+* `d6` uses default `java.util.logging.Logger` parameterized logging
 				
 The winner is: logging callbacks with `+` operator!!! 
 
-Compared to parameterized logging, logging callbacks are 2 seconds faster for 1 milion logging statements. Ok, this is an insignificant difference that could matter if the format string has more parameters.
+Compared to parameterized logging, logging callbacks are ~2 seconds faster than String.format() and ~6 seconds faster than the default parameterized logging of `java.util.loggin.Logger`. Ok, this is an insignificant difference for the 1 million logs generated, but could matter if the format string has more parameters.
 
 With 5 parameters I get:
 
 ```
 $ java -cp . test.logging.Test 2> /dev/null
-d1=17.120000s, d2=16.732000s, d3=19.253000s, d4=16.202000s, d5=16.479000s
+d1=16.847000s, d2=16.617000s, d3=19.024000s, d4=16.075000s, d5=16.408000s, d5=22.285000s
 ```
 
 Benchmark code:
@@ -103,18 +112,22 @@ Benchmark code:
 ```
 package test.logging;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.veracloud.logging.Log;
 import com.veracloud.logging.Log.Callback;
 import com.veracloud.logging.LogFactory;
 
 public class Test {
 	private static Log LOG = LogFactory.get(Test.class);
+	private static Logger _LOG = Logger.getLogger(Test.class.getName());
 
 	private static int MAX = 1000*1000;
 
 	public static void main(String[] args) {
 		long start;
-		double d1, d2, d3, d4, d5;
+		double d1, d2, d3, d4, d5, d6;
 		
 		// ---
 		start = System.currentTimeMillis();
@@ -155,7 +168,16 @@ public class Test {
 		}
 		d5 = (double) (System.currentTimeMillis() - start) / 1000D;
 		
-		System.out.println(String.format("d1=%fs, d2=%fs, d3=%fs, d4=%fs, d5=%fs", d1, d2, d3, d4, d5));
+		// ---
+		
+		start = System.currentTimeMillis();
+		for (int i = 0; i < MAX; i++) {
+			log_6(args);
+		}
+		d6 = (double) (System.currentTimeMillis() - start) / 1000D;
+		
+		System.out.println(String.format("d1=%fs, d2=%fs, d3=%fs, d4=%fs, d5=%fs, d5=%fs", 
+				d1, d2, d3, d4, d5, d6));
 	}
 
 	private static void log_1(String[] args) {
@@ -194,6 +216,10 @@ public class Test {
 				return sb.toString();
 			}
 		});
+	}
+	
+	private static void log_6(String[] args) {
+		_LOG.log(Level.SEVERE, "args.length: {0}", args.length);
 	}
 }
 ```
