@@ -2,7 +2,7 @@
 
 <!DOCTYPE project>
 
-<project basedir="." default="build-jar" name="jdk-log">
+<project basedir="." default="build-jar" name="jdk14-log">
 	<property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.6"/>
     <property name="source" value="1.6"/>
