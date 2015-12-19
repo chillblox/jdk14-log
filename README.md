@@ -18,43 +18,43 @@ import com.veracloud.logging.Log.Callback;
 import com.veracloud.logging.LogFactory;
 
 public class Test {
-	private static Log LOG = LogFactory.get(Test.class);
+    private static Log LOG = LogFactory.get(Test.class);
 
-	public static void main(final String[] args) {
-		
-		LOG.i("args.length: %d", args.length);
-		
-		LOG.w(new RuntimeException(), "args.length: %d", args.length);
-		
-		LOG.e(new RuntimeException(), new Callback() {
-			@Override
-			public String getMessage() {
-				return "args.length: " + args.length;
-			}
-		});
-		
-		// Or, using the logging level testing API...
-	
-		if (LOG.isDebugEnabled()) {
-			LOG.d("args.length: " + args.length);
-		}
-	}
+    public static void main(final String[] args) {
+
+        LOG.i("args.length: %d", args.length);
+
+        LOG.w(new RuntimeException("Error Message"), "args.length: %d", args.length);
+
+        LOG.e(new RuntimeException("Error Message"), new Callback() {
+            @Override
+            public String getMessage() {
+                return "args.length: " + args.length;
+            }
+        });
+
+        // Or, using the logging level testing API...
+
+        if (LOG.isDebugEnabled()) {
+            LOG.d("args.length: " + args.length);
+        }
+    }
 }
 ```
 
 Running Test.java gives (DEBUG was disabled):
 
 ```
-Dec 19, 2015 12:38:39 AM test.logging.Test main
+Dec 19, 2015 3:35:23 AM test.logging.Test main
 INFO: args.length: 0
-Dec 19, 2015 12:38:39 AM test.logging.Test main
+Dec 19, 2015 3:35:23 AM test.logging.Test main
 WARNING: args.length: 0
-java.lang.RuntimeException
+java.lang.RuntimeException: Error Message
 	at test.logging.Test.main(Test.java:14)
 
-Dec 19, 2015 12:38:39 AM test.logging.Test main
+Dec 19, 2015 3:35:23 AM test.logging.Test main
 SEVERE: args.length: 0
-java.lang.RuntimeException
+java.lang.RuntimeException: Error Message
 	at test.logging.Test.main(Test.java:16)
 ```
 
