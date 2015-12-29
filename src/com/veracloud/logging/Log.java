@@ -1,6 +1,5 @@
 package com.veracloud.logging;
 
-import java.util.IllegalFormatException;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
@@ -66,7 +65,7 @@ public final class Log {
       try {
         log(Level.FINEST, cb.get(), null);
       } catch (RuntimeException ex) {
-        logExceptionInCb(ex, null);
+        logUncaughtExceptionInCb(ex, null);
       }
     }
   };
@@ -102,7 +101,7 @@ public final class Log {
       try {
         log(Level.FINEST, cb.get(), null);
       } catch (RuntimeException ex) {
-        logExceptionInCb(ex, t);
+        logUncaughtExceptionInCb(ex, t);
       }
     }
   };
@@ -147,7 +146,7 @@ public final class Log {
       try {
         log(Level.FINE, cb.get(), null);
       } catch (RuntimeException ex) {
-        logExceptionInCb(ex, null);
+        logUncaughtExceptionInCb(ex, null);
       }
     }
   };
@@ -183,7 +182,7 @@ public final class Log {
       try {
         log(Level.FINE, cb.get(), null);
       } catch (RuntimeException ex) {
-        logExceptionInCb(ex, t);
+        logUncaughtExceptionInCb(ex, t);
       }
     }
   };
@@ -230,7 +229,7 @@ public final class Log {
       try {
         log(Level.INFO, cb.get(), null);
       } catch (RuntimeException ex) {
-        logExceptionInCb(ex, null);
+        logUncaughtExceptionInCb(ex, null);
       }
     }
   };
@@ -266,7 +265,7 @@ public final class Log {
       try {
         log(Level.INFO, cb.get(), null);
       } catch (RuntimeException ex) {
-        logExceptionInCb(ex, t);
+        logUncaughtExceptionInCb(ex, t);
       }
     }
   };
@@ -312,7 +311,7 @@ public final class Log {
       try {
         log(Level.WARNING, cb.get(), null);
       } catch (RuntimeException ex) {
-        logExceptionInCb(ex, null);
+        logUncaughtExceptionInCb(ex, null);
       }
     }
   };
@@ -348,7 +347,7 @@ public final class Log {
       try {
         log(Level.WARNING, cb.get(), null);
       } catch (RuntimeException ex) {
-        logExceptionInCb(ex, t);
+        logUncaughtExceptionInCb(ex, t);
       }
     }
   };
@@ -393,7 +392,7 @@ public final class Log {
       try {
         log(Level.SEVERE, cb.get(), null);
       } catch (RuntimeException ex) {
-        logExceptionInCb(ex, null);
+        logUncaughtExceptionInCb(ex, null);
       }
     }
   };
@@ -429,7 +428,7 @@ public final class Log {
       try {
         log(Level.SEVERE, cb.get(), null);
       } catch (RuntimeException ex) {
-        logExceptionInCb(ex, t);
+        logUncaughtExceptionInCb(ex, t);
       }
     }
   };
@@ -441,13 +440,13 @@ public final class Log {
   private void log(Level level, String format, Object[] args, Throwable t) {
     try {
       log(level, String.format(format, args), t);
-    } catch (IllegalFormatException ex) {
-      log(Level.WARNING, String.format("%s [%s]", format, ex), t);
+    } catch (RuntimeException ex) {
+      log(Level.WARNING, String.format("Formatting error: `%s' [%s]", format, ex), t);
     }
   }
-  
-  private void logExceptionInCb(RuntimeException ex, Throwable t) {
-    log(Level.WARNING, String.format("Callback Error [%s]", ex), t);
+
+  private void logUncaughtExceptionInCb(RuntimeException ex, Throwable t) {
+    log(Level.WARNING, String.format("Callback error: [%s]", ex), t);
   }
 
   private void log(Level level, String msg, Throwable t) {
