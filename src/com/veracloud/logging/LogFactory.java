@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.LogManager;
 
-public final class LogFactory {
+final class LogFactory {
 
 	static {
 		final LogManager logManager = LogManager.getLogManager();
@@ -33,11 +33,11 @@ public final class LogFactory {
 	// key: name (String), value: a Log instance
 	private static final Map<String, Log> loggerMap = new ConcurrentHashMap<String, Log>();
 
-	public static Log get(Class<?> cls) {
-		return get(cls.getName());
+	public static Log getLog(Class<?> cls) {
+		return getLog(cls.getName());
 	}
 
-	public static Log get(String name) {
+	public static Log getLog(String name) {
 		Log logger = loggerMap.get(name);
 		if (logger != null) {
 			return logger;

@@ -10,6 +10,14 @@ import java.util.logging.Logger;
 public final class Log {
   private static final String SELF = Log.class.getName();
 
+  public static Log get(Class<?> cls) {
+    return LogFactory.getLog(cls);
+  }
+  
+  public static Log get(String name) {
+    return LogFactory.getLog(name);
+  }
+
   private final Logger mLogger;
 
   // WARN: Log constructor should have only package access so
